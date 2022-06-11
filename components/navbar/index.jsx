@@ -1,14 +1,16 @@
 import Link from "next/link";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext } from "react";
 import styles from "./nav.module.scss";
 import { signIn, signOut, useSession } from "next-auth/react";
 import CrwnLogo from "../../assets/crown.svg";
-import CartIcon from "../cart-icon";
-import CartDropdown from "../cart-dropdown";
+import CartIcon from "../cart/cart-icon";
+import CartDropdown from "../cart/cart-dropdown";
+import { CartContext } from "../../context/cart.context";
 
 const NavigationBar = () => {
   const { status } = useSession();
-  const [isCartDropDownOpen, setIsCartDropDownOpen] = useState(false);
+  const { isCartOpen } = useContext(CartContext);
+
   return (
     <Fragment>
       <nav className={styles.navigation}>
@@ -27,7 +29,7 @@ const NavigationBar = () => {
               >
                 SignOut
               </div>
-              <CartIcon openCart={setIsCartDropDownOpen} />
+              <CartIcon />
             </>
           ) : (
             <div onClick={() => signIn()} className={styles.link}>
@@ -35,7 +37,7 @@ const NavigationBar = () => {
             </div>
           )}
         </div>
-        {isCartDropDownOpen && <CartDropdown />}
+        {isCartOpen && <CartDropdown />}
       </nav>
     </Fragment>
   );
