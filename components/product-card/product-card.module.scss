@@ -5,6 +5,7 @@
   height: 350px;
   align-items: center;
   position: relative;
+  justify-content: flex-end;
 
   img {
     width: 100%;
@@ -38,14 +39,11 @@
     display: flex;
     justify-content: space-between;
     font-size: 18px;
+    padding-top: 15px;
 
     .name {
       width: 90%;
       margin-bottom: 15px;
-    }
-
-    .price {
-      width: 10%;
     }
   }
 }
