@@ -3,9 +3,10 @@ import styles from "./cart-dropdown.module.scss";
 import Button from "../../button";
 import CartItem from "../cart-item";
 import { CartContext } from "../../../context/cart.context";
+import Link from "next/link";
 
 const CartDropdown = () => {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, setIsCartOpen } = useContext(CartContext);
   return (
     <div className={styles["cart-dropdown-container"]}>
       <div className={styles["cart-items"]}>
@@ -13,7 +14,11 @@ const CartDropdown = () => {
           <CartItem cartItem={value} key={index} />
         ))}
       </div>
-      <Button>Go to Checkout</Button>
+      <Link href="/checkout">
+        <Button onClick={() => setIsCartOpen((prevState) => !prevState)}>
+          Go to Checkout
+        </Button>
+      </Link>
     </div>
   );
 };
